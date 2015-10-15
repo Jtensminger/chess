@@ -3,6 +3,8 @@ require './king'
 require './queen'
 require './pawn'
 require './rook'
+require './bishop'
+
 class Board
 
   def initialize
@@ -12,7 +14,10 @@ class Board
     @pieces << King.new(false)
     @pieces << Queen.new(true)
     @pieces << Queen.new(false)
-
+    @pieces << Bishop.new(Vector[0,2], false)
+    @pieces << Bishop.new(Vector[0,-3], false)
+    @pieces << Bishop.new(Vector[7,2], true)
+    @pieces << Bishop.new(Vector[7,-3], true)
     (0..7).each do |n|
       @pieces << Pawn.new(n,true)
       @pieces << Pawn.new(n,false)
@@ -22,7 +27,6 @@ class Board
       @pieces << Rook.new(n,true)
       @pieces << Rook.new(n,false)
     end
-
   end
 
 

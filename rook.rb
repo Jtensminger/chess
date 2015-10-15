@@ -4,7 +4,7 @@ class Rook < Piece
   def initialize n, color
     @color = color
     if @color
-      @position = Vector[7,n - 1]
+      @position = Vector[7, n - 1]
     else
       @position = Vector[0, n - 1]
     end
