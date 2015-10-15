@@ -3,6 +3,7 @@ class Pawn < Piece
   attr_reader :color
   def initialize n, color
     @color = color
+    @moves = 1
     if @color
       @position = Vector[6,n]
     else
@@ -13,5 +14,5 @@ class Pawn < Piece
   def sym
     @color ? "♙" : "♟"
   end
-
+  
 end

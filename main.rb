@@ -1,4 +1,5 @@
 require_relative 'board'
-#require_relative 'Pieces'
 
 puts Board.new
+user1 = 1
+user2 = 2

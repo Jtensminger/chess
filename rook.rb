@@ -13,4 +13,5 @@ class Rook < Piece
   def sym
     @color ? "♖" : "♜"
   end
+
 end

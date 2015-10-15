@@ -4,31 +4,15 @@ require './queen'
 require './pawn'
 require './rook'
 require './bishop'
+require './knight'
 
 class Board
 
   def initialize
-    @pieces = []
-
-    @pieces << King.new(true)
-    @pieces << King.new(false)
-    @pieces << Queen.new(true)
-    @pieces << Queen.new(false)
-    @pieces << Bishop.new(Vector[0,2], false)
-    @pieces << Bishop.new(Vector[0,-3], false)
-    @pieces << Bishop.new(Vector[7,2], true)
-    @pieces << Bishop.new(Vector[7,-3], true)
-    (0..7).each do |n|
-      @pieces << Pawn.new(n,true)
-      @pieces << Pawn.new(n,false)
-    end
-
-    (0..1).each do |n|
-      @pieces << Rook.new(n,true)
-      @pieces << Rook.new(n,false)
-    end
+    @white_pieces = []
+    @black_pieces = []
+    setup_pieces
   end
-
 
   def generate
     board = []
@@ -39,7 +23,10 @@ class Board
       end
       board << row
     end
-    @pieces.each do |p|
+    @white_pieces.each do |p|
+      board[p.x][p.y] = p.sym
+    end
+    @black_pieces.each do |p|
       board[p.x][p.y] = p.sym
     end
     board
@@ -65,4 +52,33 @@ class Board
     str << seperator
     str << footer
   end
+
+  def setup_pieces
+    @white_pieces << King.new(true)
+    @black_pieces << King.new(false)
+    @white_pieces << Queen.new(true)
+    @black_pieces << Queen.new(false)
+    @black_pieces << Bishop.new(0, false)
+    @black_pieces << Bishop.new(1, false)
+    @white_pieces << Bishop.new(0, true)
+    @white_pieces << Bishop.new(1, true)
+    @black_pieces << Knight.new(Vector[0,1], false)
+    @black_pieces << Knight.new(Vector[0,-2], false)
+    @white_pieces << Knight.new(Vector[7,1], true)
+    @white_pieces << Knight.new(Vector[7,-2], true)
+    (0..7).each do |n|
+      @white_pieces << Pawn.new(n,true)
+      @black_pieces << Pawn.new(n,false)
+    end
+
+    (0..1).each do |n|
+      @white_pieces << Rook.new(n,true)
+      @black_pieces << Rook.new(n,false)
+    end
+  end
+
+    def place piece
+      
+    end
+
 end
