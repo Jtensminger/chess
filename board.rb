@@ -54,26 +54,24 @@ class Board
   end
 
   def setup_pieces
-    @white_pieces << King.new(true)
-    @black_pieces << King.new(false)
-    @white_pieces << Queen.new(true)
-    @black_pieces << Queen.new(false)
-    @black_pieces << Bishop.new(0, false)
-    @black_pieces << Bishop.new(1, false)
-    @white_pieces << Bishop.new(0, true)
-    @white_pieces << Bishop.new(1, true)
-    @black_pieces << Knight.new(Vector[0,1], false)
-    @black_pieces << Knight.new(Vector[0,-2], false)
-    @white_pieces << Knight.new(Vector[7,1], true)
-    @white_pieces << Knight.new(Vector[7,-2], true)
-    (0..7).each do |n|
-      @white_pieces << Pawn.new(n,true)
-      @black_pieces << Pawn.new(n,false)
-    end
+    [true, false].each do |color|
+      pieces = []
+      pieces << King.new(color)
+      pieces << Queen.new(color)
+      (0..7).each do |n|
+        pieces << Pawn.new(n, color)
+      end
+      (0..1).each do |n|
+        pieces << Knight.new(n, color)
+        pieces << Bishop.new(n, color)
+        pieces << Rook.new(n,color)
+      end
 
-    (0..1).each do |n|
-      @white_pieces << Rook.new(n,true)
-      @black_pieces << Rook.new(n,false)
+      if color
+        @black_pieces = pieces
+      else
+        @white_pieces = pieces
+      end
     end
   end
 
