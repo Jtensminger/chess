@@ -5,12 +5,12 @@ class Piece
   LEFT = Vector[0,-1]
   RIGHT = Vector[0,1]
   
-  def name
-    self.class.to_s
+  def initialize color
+    @color = color
   end
 
-  def self.sym
-    "-"
+  def name
+    self.class.to_s
   end
 
   def valid_moves
