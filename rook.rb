@@ -1,7 +1,7 @@
 require './piece'
 class Rook < Piece
   attr_reader :color
-  def initialize n, color
+  def initialize(n, color)
     @color = color
     if @color
       @position = Vector[7, n - 1]
@@ -11,7 +11,6 @@ class Rook < Piece
   end
 
   def sym
-    @color ? "♖" : "♜"
+    @color ? '♖' : '♜'
   end
-
 end

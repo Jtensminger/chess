@@ -1,4 +1,5 @@
 require 'matrix'
+require './piece'
 require './king'
 require './queen'
 require './pawn'
@@ -7,7 +8,6 @@ require './bishop'
 require './knight'
 
 class Board
-
   def initialize
     @white_pieces = []
     @black_pieces = []
@@ -18,7 +18,7 @@ class Board
     board = []
     8.times do
       row = []
-      8.times do 
+      8.times do
         row << '_'
       end
       board << row
@@ -30,10 +30,17 @@ class Board
       board[p.x][p.y] = p.sym
     end
     board
-  end 
+  end
+
+  def piece_at(pos)
+    white = @white_pieces.find { |p| p.x == pos[0] && p.y == pos[1] }
+    return white if white
+    black = @black_pieces.find { |p| p.x == pos[0] && p.y == pos[1] }
+    return black if black
+  end
 
   def footer
-    "  a b c d e f g h"
+    '  a b c d e f g h'
   end
 
   def seperator
@@ -41,7 +48,7 @@ class Board
   end
 
   def to_s
-    str = ""
+    str = ''
     decr = 8
     generate.each do |row|
       str << "#{decr}|"
@@ -64,7 +71,7 @@ class Board
       (0..1).each do |n|
         pieces << Knight.new(n, color)
         pieces << Bishop.new(n, color)
-        pieces << Rook.new(n,color)
+        pieces << Rook.new(n, color)
       end
 
       if color
@@ -75,8 +82,11 @@ class Board
     end
   end
 
-    def place piece
-      
-    end
+  def get_move(from, to)
+    [Vector[letter_of(from[0]), from[1].to_i], Vector[letter_of(to[0]), to[1].to_i]]
+  end
 
+  def letter_of(char)
+    char.ord - 'A'.ord
+  end
 end

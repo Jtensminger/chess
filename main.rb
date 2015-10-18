@@ -1,5 +1,4 @@
-require_relative 'board'
+require_relative 'game'
 
-puts Board.new
-user1 = 1
-user2 = 2
+game = Game.new
+game.go
